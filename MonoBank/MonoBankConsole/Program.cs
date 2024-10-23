@@ -70,6 +70,11 @@ while (user_continue)
                 user_continue = false;
                 break;
             }
+        default:
+            {
+                Console.WriteLine("Invalid option\n");
+                break;
+            }
     }
 
     Console.WriteLine("Do you want to make another option?\n");
