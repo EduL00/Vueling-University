@@ -1,22 +1,25 @@
-﻿bool          user_continue;
-decimal       user_income = 0;
+﻿decimal       user_income = 0;
 List<decimal> user_movements = new();
+string        user_option;
+const string  exit_option = "7";
 
-user_continue = true;
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-while (user_continue)
+do
 {
-    string        user_option;
+    bool is_decimal;
 
-    Console.Clear ();
-    Console.WriteLine("Choose an option\n");
+    Console.Clear();
+    Console.WriteLine("====================================");
     Console.WriteLine("1. Money Inconme\n");
     Console.WriteLine("2. Money Outcome\n");
     Console.WriteLine("3. List all movements\n");
     Console.WriteLine("4. List incomes\n");
     Console.WriteLine("5. List outcomes\n");
     Console.WriteLine("6. Show current money\n");
-    Console.WriteLine("7. Exit");
+    Console.WriteLine($"{exit_option}. Exit");
+    Console.WriteLine("====================================");
+    Console.Write("Choose an option:");
 
     user_option = Console.ReadLine();
 
@@ -25,21 +28,47 @@ while (user_continue)
         case "1":
             {
                 string money_income;
+                decimal parsed_income;
 
-                Console.WriteLine("Introduce the money to make the income.\n");
+
+                Console.Write("Enter the money to make the income: ");
                 money_income = Console.ReadLine();
-                user_income += System.Convert.ToDecimal(money_income);
-                user_movements.Add(System.Convert.ToDecimal(money_income));
+
+                is_decimal = decimal.TryParse(money_income, out parsed_income);
+
+                if ((is_decimal) && (parsed_income > 0))
+                {
+                    user_income += parsed_income;
+                    user_movements.Add(parsed_income);
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid income value");
+                }
+
                 break;
             }
         case "2":
             {
-                string money_outcome;
+                string  money_outcome;
+                decimal parsed_outcome;
 
-                Console.WriteLine("Introduce the money to make the outcome.\n");
+                Console.Write("Enter the money to make the outcome: ");
                 money_outcome = Console.ReadLine();
-                user_income -= System.Convert.ToDecimal(money_outcome);
-                user_movements.Add(-(System.Convert.ToDecimal(money_outcome)));
+
+                is_decimal = decimal.TryParse(money_outcome, out parsed_outcome);
+
+                if ((is_decimal) && (parsed_outcome > 0))
+                {
+                    user_income -= parsed_outcome;
+                    user_movements.Add(-(parsed_outcome));
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid income value");
+                }
                 break;
             }
         case "3":
@@ -62,12 +91,12 @@ while (user_continue)
             }
         case "6":
             {
-                Console.WriteLine("Current money: "+user_income);
+                Console.WriteLine("Your current money: " + user_income+ " €");
                 break;
             }
-        case "7":
+        case exit_option:
             {
-                user_continue = false;
+                Console.WriteLine("Your current money is: " + user_income+ " €");
                 break;
             }
         default:
@@ -77,17 +106,11 @@ while (user_continue)
             }
     }
 
-    Console.WriteLine("Do you want to make another option?\n");
-    Console.WriteLine("(Y)es or (N)o");
-    user_option = Console.ReadLine();
+    if (user_option != exit_option)
+    {
+        Console.WriteLine("Press any key to return to the main menu.");
+        Console.ReadKey();
+    }
 
-    if ((user_option == "Y") || (user_option == "y"))
-        user_continue = true;
-    else if ((user_option == "N") || (user_option == "n"))
-        user_continue = false;
-    else
-        Console.WriteLine("Invalid Input\n");
 
-}
-
-Console.WriteLine("Your current money is: "+user_income);
+} while (user_option != exit_option);
