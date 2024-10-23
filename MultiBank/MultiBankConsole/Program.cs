@@ -15,62 +15,81 @@ for (int i = 0; i < num_users; ++i)
 
 do
 {
+    Console.Clear();
     Console.Write("Enter your account number: ");
     account_number = Console.ReadLine();
 
     if (account_number == null)
-        Console.WriteLine("Invalid account number.");
-    else
     {
-       index = accounts.IndexOf(account_number);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Invalid account number.");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Press any key to retry");
+        Console.ReadKey();
+        continue;
+    }
 
-        if (index == -1)
+    index = accounts.IndexOf(account_number);
+
+    if (index == -1)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("The account does not exists.");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Press any key to retry");
+        Console.ReadKey();
+        account_number = null;
+        continue;
+    }
+
+    int max_attempts = 3;
+    int n_attempt = 1;
+    string? pin_number;
+    bool login_sucess = false;
+
+    do
+    {
+        Console.Write("Enter the pin of the account: ");
+        pin_number = Console.ReadLine();
+
+        if (pin_number == null)
         {
-            Console.WriteLine("The account does not exists.");
-            account_number = null;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Invalid pin number.");
+            Console.ForegroundColor = ConsoleColor.White;
+            ++n_attempt;
         }
         else
         {
-            int max_attempts = 3;
-            int n_attempt = 1;
-            string? pin_number;
-            bool login_sucess = false;
-
-            do
+            if (pin_number == pins[index])
             {
-                Console.Write("Enter the pin of the account: ");
-                pin_number = Console.ReadLine();
-
-                if (pin_number == null)
-                {
-                    Console.WriteLine("Invalid pin number.");
-                    ++n_attempt;
-                }
-                else
-                {
-                    if (pin_number == pins[index])
-                    {
-                        Console.WriteLine("Login Successfully.");
-                        login_sucess = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Incorrect pin");
-                        ++n_attempt;
-                    }
-
-                }
-
-            } while ((n_attempt <= max_attempts) && (login_sucess == false));
-
-            if (login_sucess == false)
-            {
-                Console.WriteLine("Error in login");
-                account_number = null;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Login Successfully.");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Press any button to enter the main menu");
+                Console.ReadKey();
+                login_sucess = true;
             }
-            
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Incorrect pin");
+                Console.ForegroundColor = ConsoleColor.White;
+                ++n_attempt;
+            }
 
         }
+
+    } while ((n_attempt <= max_attempts) && (login_sucess == false));
+
+    if (login_sucess == false)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Error in login");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Press any key to retry");
+        Console.ReadKey();
+        account_number = null;
     }
 
 } while (account_number == null);
