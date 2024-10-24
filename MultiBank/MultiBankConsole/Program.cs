@@ -135,11 +135,16 @@ do
                 {
                     curr_money[index]+= parsed_income;
                     movements[index].Add(parsed_income);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Added {parsed_income}€. Your Current money is: {curr_money[index]}€.");
+                    Console.ForegroundColor = ConsoleColor.White;
 
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid income value");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 break;
@@ -158,45 +163,127 @@ do
                 {
                     curr_money[index] -= parsed_outcome;
                     movements[index].Add(-(parsed_outcome));
-
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Retired {parsed_outcome}€. Your Current money is: {curr_money[index]}€.");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid income value");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 break;
             }
         case "3":
             {
-                Console.WriteLine("List of all movements\n");
-                movements[index].ForEach(x => Console.WriteLine(x));
+                if (movements[index].Count() == 0) Console.WriteLine("No movements so far.");
+
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("=======================");
+                    Console.WriteLine("List of all movements");
+                    Console.WriteLine("=======================");
+
+                    for (int i = 0; i < movements[index].Count(); ++i)
+                    {
+                        if (movements[index][i] > 0) Console.WriteLine($"{movements[index][i]}€");
+                        else Console.WriteLine($"{movements[index][i]}€");
+                    }
+                    Console.WriteLine("------------------");
+                    Console.WriteLine($"Total: {curr_money[index]}€");
+                }
+
                 break;
             }
         case "4":
             {
-                Console.WriteLine("List of Incomes\n");
-                movements[index].ForEach(x => { if (x > 0) Console.WriteLine(x); });
+                decimal total_income = 0;
+                bool    has_income = false;
+
+
+                 for (int i = 0; i < movements[index].Count(); ++i)
+                 {
+                    if (movements[index][i] > 0)
+                    {
+                            if (has_income == false)
+                            {
+                                Console.WriteLine("");
+                                Console.WriteLine("================");
+                                Console.WriteLine("List of Incomes");
+                                Console.WriteLine("================");
+                                has_income = true;
+                            }
+
+                            total_income += movements[index][i];
+                            Console.WriteLine($"{movements[index][i]}€");
+                        }
+                    }
+
+                    if (has_income)
+                    {
+                        Console.WriteLine("------------------");
+                        Console.WriteLine($"Total: {total_income}€");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No incomes so far.");
+                    }
+
+
                 break;
             }
         case "5":
             {
-                Console.WriteLine("List of Outcomes\n");
-                movements[index].ForEach(x => { if (x < 0) Console.WriteLine(x); });
+                bool has_outcomes = false;
+                decimal total_outcome = 0;
+
+                for (int i = 0; i < movements[index].Count(); ++i)
+                {
+                    if (movements[index][i] < 0)
+                    {
+                        if (has_outcomes == false)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("===================");
+                            Console.WriteLine("List of Outcomes");
+                            Console.WriteLine("===================");
+                            has_outcomes = true;
+                        }
+
+                        total_outcome += -(movements[index][i]);
+                        Console.WriteLine($"{-(movements[index][i])}€");
+                    }
+                }
+
+                if (has_outcomes)
+                {
+                    Console.WriteLine("------------------");
+                    Console.WriteLine($"Total: {total_outcome}€");
+                }
+                else
+                {
+                    Console.WriteLine("No outcomes so far.");
+                }
+
                 break;
             }
         case "6":
             {
-                Console.WriteLine("Your current money: " + curr_money[index] + " €");
+                Console.WriteLine("Your current money: " + curr_money[index] + "€");
                 break;
             }
         case exit_option:
             {
-                Console.WriteLine("Your current money is: " + curr_money[index] + " €");
+                Console.WriteLine("Your current money is: " + curr_money[index] + "€");
                 break;
             }
         default:
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid option\n");
+                Console.ForegroundColor = ConsoleColor.White;
                 break;
             }
     }
