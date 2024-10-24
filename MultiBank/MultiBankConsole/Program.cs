@@ -201,5 +201,18 @@ do
             }
     }
 
+    if (user_option != exit_option)
+    {
+        string? user_cont;
+        Console.WriteLine("Do you want to do any other operation?");
+        Console.WriteLine("(Y)es or (N)o");
+        user_cont = Console.ReadLine();
+
+        if ((user_cont == "N") || (user_cont == "n"))
+        {
+            Console.WriteLine("Your current money is: " + curr_money[index] + "€");
+            break;
+        }
+    }
 
 } while (user_option != exit_option);
