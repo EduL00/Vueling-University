@@ -11,6 +11,9 @@ namespace Classes
     public class Login
     {
         List<User> users;
+        private ConsoleColor succ_color = ConsoleColor.Green;
+        private ConsoleColor err_color = ConsoleColor.Red;
+        private ConsoleColor std_color = ConsoleColor.White;//elc mirar lo de los colores
         public Login() 
         { 
             users = new List<User>();
@@ -23,14 +26,35 @@ namespace Classes
             }
         }
 
-        public bool TryToLogin(string user_id)
+        public bool WantToLogin (out string account_number)
+        {
+            Console.Clear();
+            Console.Write("Enter your account number to login or 'exit' to close the app: ");
+            account_number = Console.ReadLine();
+
+            if (account_number == "exit" || account_number == "Exit")
+                return false;
+
+            return true;
+        }
+        public bool TryToLogin(string user_id, out User user)
         {
             int user_index;
+            user = null;
+
+            if (user_id == null)
+            {
+                Console.ForegroundColor = err_color;
+                Console.WriteLine("Invalid account number.");
+                Console.ForegroundColor = std_color;
+                return false;
+            }
 
             if (FindUser(user_id, out user_index) == false) return false;
 
             if (LookForPin(user_index) == false) return false;
 
+            user = users[user_index];
             return true;
         }
 

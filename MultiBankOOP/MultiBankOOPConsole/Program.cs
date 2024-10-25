@@ -1,50 +1,37 @@
 ﻿using Classes;
 
-var err_color = ConsoleColor.Red;
-var std_color = ConsoleColor.White;
-var succ_color = ConsoleColor.Green;
+var      err_color = ConsoleColor.Red;
+var      std_color = ConsoleColor.White;
+var      succ_color = ConsoleColor.Green;
+Login    login = new Login();
+MainMenu main_menu = new MainMenu();
+
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 while (true)
 {
-    //elc Quizas hacer un gestor de menus
     string? account_number;
-    Login login = new Login();
+    User user = new();
 
-    Console.Clear();
-    Console.Write("Enter your account number to login or 'exit' to close the app: ");
-    account_number = Console.ReadLine();
+    if (login.WantToLogin(out account_number) == false) return;
 
-    if (account_number == "exit" || account_number == "Exit")
-        return;
+    if (login.TryToLogin(account_number, out user))
+    {
+        Console.ForegroundColor = succ_color;
+        Console.WriteLine("Login Successfully");
+        Console.ForegroundColor = std_color;
+        Console.WriteLine("Press any button to enter the main menu");
+        Console.ReadKey();
 
-    if (account_number == null)
+        main_menu.ShowMainMenu(user);
+    }
+    else
     {
         Console.ForegroundColor = err_color;
-        Console.WriteLine("Invalid account number.");
+        Console.WriteLine("Error in login");
         Console.ForegroundColor = std_color;
         Console.WriteLine("Press any key to retry");
         Console.ReadKey();
         continue;
-    }
-    else
-    {
-        if (login.TryToLogin(account_number))
-        {
-            Console.ForegroundColor = succ_color;
-            Console.WriteLine("Login Successfully");
-            Console.ForegroundColor = std_color;
-            Console.WriteLine("Press any button to enter the main menu");
-            Console.ReadKey();
-
-        }
-        else
-        {
-            Console.ForegroundColor = err_color;
-            Console.WriteLine("Error in login");
-            Console.ForegroundColor = std_color;
-            Console.WriteLine("Press any key to retry");
-            Console.ReadKey();
-            continue;
-        }
     }
 }
