@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.Xml.Schema;
 
 namespace FamilyLibrary
 {
@@ -44,90 +46,52 @@ namespace FamilyLibrary
         public void ModifyAttributes()
         {
             bool user_continue = true;
+            List<string> attributes = new List<string>();
 
-            if (user_continue)
+            attributes.Add("name");
+            attributes.Add("age");
+            attributes.Add("job");
+            attributes.Add("number of sons");
+            attributes.Add("school name");
+            attributes.Add("school year");
+            attributes.Add("school id");
+
+            for (int i = 0; i < attributes.Count; i++)
             {
-
-                if (AskToModify("name"))
+                if (AskToModify(attributes[i]))
                 {
-                    Name = GetNewValue();
-                    ShowSuccessInSet("name", Name);
+                    string? new_value;
+
+                    new_value = GetNewValue();
+
+                    if (attributes[i] == "name")
+                        Name = new_value;
+                    else if (attributes[i] == "age")
+                        Age = new_value;
+                    else if (attributes[i] == "job")
+                        Job = new_value;
+                    else if (attributes[i] == "number of sons")
+                        NumberOfSons = new_value;
+                    else if (attributes[i] == "school name")
+                        SchoolName = new_value;
+                    else if (attributes[i] == "school year")
+                        SchoolYear = new_value;
+                    else
+                        SchoolId = new_value;
+
+                    ShowSuccessInSet(attributes[i], new_value);
                 }
-                else ShowNotSet();
+                else
+                {
+                    ShowNotSet();
+                }
 
                 user_continue = AskContinue();
-            }
-
-            if (user_continue)
-            {
-                if (AskToModify("age"))
+                if (!user_continue)
                 {
-                    Age = GetNewValue();
-                    ShowSuccessInSet("age", Age);
+                    break;
+
                 }
-                else ShowNotSet();
-
-                user_continue = AskContinue();
-            }
-
-            if (user_continue)
-            {
-                if (AskToModify("job"))
-                {
-                    Job = GetNewValue();
-                    ShowSuccessInSet("job", Job);
-                }
-                else ShowNotSet();
-
-                user_continue = AskContinue();
-            }
-
-            if (user_continue)
-            {
-                if (AskToModify("number of sons"))
-                {
-                    NumberOfSons = GetNewValue();
-                    ShowSuccessInSet("number of sons", NumberOfSons);
-                }
-                else ShowNotSet();
-
-                user_continue = AskContinue();
-            }
-
-            if (user_continue)
-            {
-                if (AskToModify("school name"))
-                {
-                    SchoolName = GetNewValue();
-                    ShowSuccessInSet("school name", SchoolName);
-                }
-                else ShowNotSet();
-
-                user_continue = AskContinue();
-            }
-
-            if (user_continue)
-            {
-                if (AskToModify("school year"))
-                {
-                    SchoolYear = GetNewValue();
-                    ShowSuccessInSet("school year", SchoolYear);
-                }
-                else ShowNotSet();
-
-                user_continue = AskContinue();
-            }
-
-            if (user_continue)
-            {
-                if (AskToModify("school id"))
-                {
-                    SchoolId = GetNewValue();
-                    ShowSuccessInSet("school id", SchoolId);
-                }
-                else ShowNotSet();
-
-                user_continue= AskContinue();
             }
 
             ShowValues();
