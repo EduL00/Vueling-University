@@ -44,13 +44,13 @@ namespace Classes
         {
             Console.Clear();
             Console.WriteLine("====================================");
-            Console.WriteLine("1. Money Inconme\n");
-            Console.WriteLine("2. Money Outcome\n");
-            Console.WriteLine("3. List all movements\n");
-            Console.WriteLine("4. List incomes\n");
-            Console.WriteLine("5. List outcomes\n");
-            Console.WriteLine("6. Show current money\n");
-            Console.WriteLine($"7. Exit");
+            Console.WriteLine("1. Money Inconme");
+            Console.WriteLine("2. Money Outcome");
+            Console.WriteLine("3. List all movements");
+            Console.WriteLine("4. List incomes");
+            Console.WriteLine("5. List outcomes");
+            Console.WriteLine("6. Show current money");
+            Console.WriteLine("7. Exit");
             Console.WriteLine("====================================");
             Console.Write("Choose an option:");
             return Console.ReadLine();
