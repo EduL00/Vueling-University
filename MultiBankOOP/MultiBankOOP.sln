@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Classes", "Classes\Classes.csproj", "{CBEE7E11-EB4E-445F-8BEC-093528F6E9C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiBankOOPConsole", "MultiBankOOPConsole\MultiBankOOPConsole.csproj", "{EDEF66A4-3F8A-4D4F-ADE0-FF98957D3355}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBEE7E11-EB4E-445F-8BEC-093528F6E9C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBEE7E11-EB4E-445F-8BEC-093528F6E9C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBEE7E11-EB4E-445F-8BEC-093528F6E9C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBEE7E11-EB4E-445F-8BEC-093528F6E9C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDEF66A4-3F8A-4D4F-ADE0-FF98957D3355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDEF66A4-3F8A-4D4F-ADE0-FF98957D3355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDEF66A4-3F8A-4D4F-ADE0-FF98957D3355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDEF66A4-3F8A-4D4F-ADE0-FF98957D3355}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45E8DDF6-DE02-43BD-87CC-B8D16FF0B8DC}
+	EndGlobalSection
+EndGlobal
