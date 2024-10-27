@@ -32,6 +32,7 @@ namespace Classes
             Level = level;
             TechKnowledge = tech;
             IsManager = false;
+            InATeam = false;
         }
 
         public bool WorkerHasTech(string tech)
@@ -75,6 +76,11 @@ namespace Classes
         public void SetAsManager()
         {
             IsManager = true;
+        }
+
+        public void IsNowInATeam ()
+        {
+            InATeam = true;
         }
     }
 }

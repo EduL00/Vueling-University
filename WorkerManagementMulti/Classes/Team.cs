@@ -23,12 +23,6 @@ namespace Classes
 
         public void ListMembers()
         {
-            if (Technicians.Count == 0)
-            {
-                Console.WriteLine("The team has no members");
-                return;
-            }
-
             if (HasManager == false)
             {
                 Console.WriteLine("Team Manager: Not Set");
@@ -37,6 +31,13 @@ namespace Classes
             {
                 Console.WriteLine($"Team Manager: {TeamManager.Name} {TeamManager.Surname}");
             }
+
+            if (Technicians.Count == 0)
+            {
+                Console.WriteLine("The team has no members");
+                return;
+            }
+
             Console.WriteLine("Team Member");
 
             for (int i = 0; i < Technicians.Count; i++) Console.WriteLine($"{i + 1}. {Technicians[i].Name} {Technicians[i].Surname}");

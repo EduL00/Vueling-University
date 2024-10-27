@@ -11,7 +11,7 @@ namespace Classes
 
         public DateTime LeavingDate { get; set; }
 
-        private static int NITWorkers;
+        private static int NITWorkers = 1;
 
         public int GetIdITWorker()
         {

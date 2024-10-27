@@ -228,12 +228,12 @@ namespace Classes
             Console.ForegroundColor = std_color;
         }
 
-        public void ListTeams()
+        public bool ListTeams()
         {
             if (Teams.Count == 0)
             {
                 Console.WriteLine("There are no teams registered");
-                return;
+                return false;
             }
             Console.Clear();
             Console.WriteLine("========================");
@@ -245,6 +245,7 @@ namespace Classes
             }
             Console.WriteLine("========================");
 
+            return true;
         }
 
         public void ListTeamMembers(MenuRole role, ITWorker manager)
@@ -315,7 +316,10 @@ namespace Classes
                     }
 
                 }
+
+                Console.WriteLine("========================");
             }
+            Console.WriteLine("========================");
         }
 
         public void SetTeamManager()
@@ -345,7 +349,8 @@ namespace Classes
                 return;
             }
 
-            ListTeams();
+            if (ListTeams() == false) return;
+
             if (found_team = SearchTeam(out team) == false)
             {
                 Console.ForegroundColor = err_color;
@@ -381,7 +386,7 @@ namespace Classes
                 return;
             }
 
-            ListTeams();
+            if (ListTeams() == false) return;
 
             if (found_team = SearchTeam(out team) == false)
             {
@@ -392,6 +397,7 @@ namespace Classes
             }
 
             team.SetTechnician(worker);
+            worker.IsNowInATeam();
 
             Console.ForegroundColor = succ_color;
             Console.WriteLine($"Worker {worker.Id} set as technician of team {team.Name}");
@@ -604,7 +610,7 @@ namespace Classes
         {
             Team team = null;
 
-            if (!worker.InATeam)
+            if (worker.InATeam == false)
             {
                 Console.WriteLine("Worker not in a team");
                 return;

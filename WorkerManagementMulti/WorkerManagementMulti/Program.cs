@@ -9,6 +9,7 @@ Login login = new();
 while (true)
 {
     string? id;
+    Console.Clear();
     Console.Write("Enter a worker ID (0 to enter in admin mode) or exit to exit the app: ");
     id = Console.ReadLine();
     if (id == null)

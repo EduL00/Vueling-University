@@ -38,12 +38,16 @@ namespace Classes
             }
 
             if (id == "0")
+            {
                 menu_role = MenuRole.Admin;
-
-            if (worker.IsManager)
-                menu_role = MenuRole.Manager;
+            }
             else
-                menu_role = MenuRole.Worker;
+            {
+                if (worker.IsManager)
+                    menu_role = MenuRole.Manager;
+                else
+                    menu_role = MenuRole.Worker;
+            }
 
             do
             {
@@ -115,7 +119,7 @@ namespace Classes
                         {
                             if (menu_role == MenuRole.Admin)
                                 Manager.RegisterTeam();
-                            if (menu_role == MenuRole.Manager)
+                            else if (menu_role == MenuRole.Manager)
                                 Manager.ListTaskAssignementsTeam(menu_role, worker);
                             else
                                 Manager.SetYourselfToTask(worker);
