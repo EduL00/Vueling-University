@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerManagmentAdminConsole", "WorkerManagmentAdminConsole\WorkerManagmentAdminConsole.csproj", "{D0FD866E-2E76-4A97-81A9-56BDC866EE9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerManagmentAdminConsole", "WorkerManagmentAdminConsole\WorkerManagmentAdminConsole.csproj", "{D0FD866E-2E76-4A97-81A9-56BDC866EE9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Classes\Classes.csproj", "{ACAD8BED-1A07-4954-AC11-2731D4457CCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D0FD866E-2E76-4A97-81A9-56BDC866EE9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0FD866E-2E76-4A97-81A9-56BDC866EE9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0FD866E-2E76-4A97-81A9-56BDC866EE9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACAD8BED-1A07-4954-AC11-2731D4457CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACAD8BED-1A07-4954-AC11-2731D4457CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACAD8BED-1A07-4954-AC11-2731D4457CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACAD8BED-1A07-4954-AC11-2731D4457CCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
