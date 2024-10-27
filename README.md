@@ -28,4 +28,4 @@
 - **WorkerManagmentAdmin**: Sistema de gestión de trabajadores en modo administrador.
 
 ### Gestión de Trabajadores en Modo Multi-Usuario
-- **-------**: Información no disponible.
+- **MultiWworkerManagement**: Sistema de gestión de trabajadores en modo multiusuario.
