@@ -34,3 +34,6 @@
 
 ### Programa cuenta bancaraia multi-ususario con mejoras en patrones de diseño y DDD
 - **MultiBankOOPDesignPatternConsole**: Sistema de gestión bancaria para múltiples usuarios con mejoras de diseño de patrones.
+
+### Gestión de Trabajadores en Modo multi-usuario con mejoras en patrones de Diseño y DDD
+- **WorkerManagementMultiDesignPattern** Sistema de gestión de trabajadores en modo multiusuario con mejoras de diseño de patrones.
