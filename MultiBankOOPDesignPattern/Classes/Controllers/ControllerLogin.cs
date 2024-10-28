@@ -5,16 +5,17 @@ using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Classes.Classes;
 
-namespace Classes
+namespace Classes.Controllers
 {
-    public class Login
+    public class ControllerLogin
     {
         List<User> users;
         private ConsoleColor succ_color = ConsoleColor.Green;
         private ConsoleColor err_color = ConsoleColor.Red;
         private ConsoleColor std_color = ConsoleColor.White;//elc mirar lo de los colores
-        public Login()
+        public ControllerLogin()
         {
             users = new List<User>();
 

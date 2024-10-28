@@ -1,10 +1,11 @@
-﻿using Classes;
+﻿using Classes.Classes;
+using Classes.Controllers;
 
 var err_color = ConsoleColor.Red;
 var std_color = ConsoleColor.White;
 var succ_color = ConsoleColor.Green;
-Login login = new Login();
-MainMenu main_menu = new MainMenu();
+ControllerLogin login = new ();
+ControllerMainMenu main_menu = new ();
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
