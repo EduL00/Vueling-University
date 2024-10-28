@@ -29,3 +29,8 @@
 
 ### Gestión de Trabajadores en Modo Multi-Usuario
 - **WorkerManagementMulti**: Sistema de gestión de trabajadores en modo multiusuario.
+
+## Tema 4
+
+### Programa cuenta bancaraia multi-ususario con mejoras en patrones de diseño y DDD
+- **MultiBankOOPDesignPatternConsole**: Sistema de gestión bancaria para múltiples usuarios con mejoras de diseño de patrones.
