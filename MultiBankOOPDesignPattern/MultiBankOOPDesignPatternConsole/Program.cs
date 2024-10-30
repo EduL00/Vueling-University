@@ -1,38 +1,26 @@
-﻿using Classes.Classes;
-using Classes.Controllers;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MultiBankOOP.Infrastructure.Contracts;
+using MultiBankOOP.Library.Contracts;
+using MultiBankOOP.Library.Impl;
+using MultiBankOOP.Infrastructure.Impl;
 
-var err_color = ConsoleColor.Red;
-var std_color = ConsoleColor.White;
-var succ_color = ConsoleColor.Green;
-ControllerLogin login = new ();
-ControllerMainMenu main_menu = new ();
-
-Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-while (true)
+namespace MultiBankOOP.Presentation.ConsoleUI
 {
-    string? account_number;
-    User user = new();
-
-    if (login.WantToLogin(out account_number) == false) return;
-
-    if (login.TryToLogin(account_number, out user))
+    internal class Program
     {
-        Console.ForegroundColor = succ_color;
-        Console.WriteLine("Login Successfully");
-        Console.ForegroundColor = std_color;
-        Console.WriteLine("Press any button to enter the main menu");
-        Console.ReadKey();
+        static void Main(string[] args)
+        {
+            ServiceCollection services = new ServiceCollection();
+            ServiceProvider serviceProvider = services
+                .AddScoped<IAccountRepository, AccountRepository>()
+                .AddScoped<IMovementsRepository, MovementsRepository>()
+                .AddScoped<IAccountService, AccountService>()
+                .AddScoped<MainMenu>()
+                .BuildServiceProvider();
 
-        main_menu.ShowMainMenu(user);
-    }
-    else
-    {
-        Console.ForegroundColor = err_color;
-        Console.WriteLine("Error in login");
-        Console.ForegroundColor = std_color;
-        Console.WriteLine("Press any key to retry");
-        Console.ReadKey();
-        continue;
+            MainMenu? mm = serviceProvider.GetService<MainMenu>();
+
+            mm?.Execute();
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -12,8 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MultiBankOOP.Infraestructure.Impl\MultiBankOOP.Infraestructure.Impl.csproj" />
-    <ProjectReference Include="..\MultiBankOOP.Library.Impl\MultiBankOOP.Library.Impl.csproj" />
+    <ProjectReference Include="..\MultiBankOOP.Domain.Models\MultiBankOOP.Domain.Models.csproj" />
+    <ProjectReference Include="..\MultiBankOOP.Infraestructure.Contracts\MultiBankOOP.Infraestructure.Contracts.csproj" />
+    <ProjectReference Include="..\MultiBankOOP.Library.Contracts\MultiBankOOP.Library.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
