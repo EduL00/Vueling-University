@@ -9,6 +9,7 @@ namespace MultiBankOOP.Domain.Models
         public const decimal maxDebtAllowed = -200;
 
         public string? Number { get; set; }
+        public int   ? Pin {  get; set; }
         public decimal Money { get; set; }
         public List<MovementModel>? Movements { get; set; }
 
@@ -19,6 +20,10 @@ namespace MultiBankOOP.Domain.Models
         public bool outcomeOverMaxValue;
         public bool outcomeLeavesAccountOverMaxAllowedDebt;
 
+        public bool Login(int pin)
+        {
+            return Pin == pin;
+        }
         public bool ValidIncome(decimal income)
         {
             incomeNegative = income < 0;

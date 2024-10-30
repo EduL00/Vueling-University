@@ -4,7 +4,7 @@ namespace MultiBankOOP.Infrastructure.Contracts
 {
     public interface IAccountRepository
     {
-        AccountEntity? GetAccountInfo();
-        void UpdateAccount(AccountEntity updatedEntity);
+        AccountEntity? GetAccountInfo(string number);
+        void UpdateAccount(string number, AccountEntity updatedEntity);
     }
 }

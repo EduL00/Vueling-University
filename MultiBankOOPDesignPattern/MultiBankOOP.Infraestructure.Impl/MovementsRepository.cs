@@ -7,16 +7,23 @@ namespace MultiBankOOP.Infrastructure.Impl
 {
     public class MovementsRepository : IMovementsRepository
     {
-        private static List<MovementEntity> simulatedMovementsDBTable = new();
 
-        public List<MovementEntity> GetMovements()
+        private static Dictionary<string, List<MovementEntity>> simulatedMovementsDBTable = new()
         {
-            return simulatedMovementsDBTable;
+            {"1000", new List<MovementEntity>()},
+            {"2000", new List<MovementEntity>()},
+            {"3000", new List<MovementEntity>()},
+        };
+
+        public List<MovementEntity> GetMovements(string user)
+        {
+            return simulatedMovementsDBTable[user];
         }
 
-        public void AddMovement(MovementEntity newMovement)
+        public void AddMovement(string user, MovementEntity newMovement)
         {
-            simulatedMovementsDBTable.Add(newMovement);
+            List <MovementEntity> movs = simulatedMovementsDBTable[user];
+            movs.Add(newMovement);
         }
     }
 }

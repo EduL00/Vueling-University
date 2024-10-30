@@ -13,6 +13,7 @@ namespace MultiBankOOP.Library.Impl
     {
         private readonly IAccountRepository? _accountRepository;
         private readonly IMovementsRepository? _movementsRepository;
+        public string UserNumber { get; set; }
 
         public AccountService(IAccountRepository accountRepository, IMovementsRepository? movementsRepository)
         {
@@ -20,6 +21,40 @@ namespace MultiBankOOP.Library.Impl
             _movementsRepository = movementsRepository;
         }
 
+        public void SetUserNumber (string number)
+        {
+            UserNumber = number;
+        }
+        public LoginResultDto Login(string number, int pin)
+        {
+            LoginResultDto loginResult = new()
+            {
+                ResultHasErrors = false,
+                Error = null
+            };
+
+            AccountModel accountModel = new();
+            AccountEntity accountEntity = _accountRepository?.GetAccountInfo(number);
+
+            if (accountEntity == null)
+            {
+                loginResult.ResultHasErrors = true;
+                loginResult.Error = LoginErrorEnum.NotPresent;
+
+            }
+            else
+            {
+                accountModel.Number = accountEntity.number;
+                accountModel.Pin = accountEntity.pin;
+
+                if (!accountModel.Login(pin))
+                    loginResult.Error = LoginErrorEnum.IncorrectPin;
+
+            }
+
+            return loginResult;
+
+        }
         public IncomeResultDto AddMoney(decimal income)
         {
             IncomeResultDto result = new()
@@ -31,8 +66,8 @@ namespace MultiBankOOP.Library.Impl
             AccountModel accountModel = new();
             if (accountModel.ValidIncome(income))
             {
-                AccountEntity? accountEntity = _accountRepository?.GetAccountInfo();
-                List<MovementEntity>? movementsEntityList = _movementsRepository?.GetMovements();
+                AccountEntity? accountEntity = _accountRepository?.GetAccountInfo(UserNumber);
+                List<MovementEntity>? movementsEntityList = _movementsRepository?.GetMovements(UserNumber);
                 if (accountEntity != null && movementsEntityList != null)
                 {
                     // map entity to domain model...
@@ -55,8 +90,8 @@ namespace MultiBankOOP.Library.Impl
                     };
 
                     // ... in order to save entity with the last changes done
-                    _accountRepository?.UpdateAccount(accountEntity);
-                    _movementsRepository?.AddMovement(movementToAdd);
+                    _accountRepository?.UpdateAccount(UserNumber, accountEntity);
+                    _movementsRepository?.AddMovement(UserNumber, movementToAdd);
 
                     // map domain model to Dto in order to add needed information to presentation layer
                     result.totalMoney = accountModel.Money;
@@ -92,8 +127,8 @@ namespace MultiBankOOP.Library.Impl
             AccountModel accountModel = new();
             if (accountModel.ValidOutcome(outcome))
             {
-                AccountEntity? accountEntity = _accountRepository?.GetAccountInfo();
-                List<MovementEntity>? movementsEntityList = _movementsRepository?.GetMovements();
+                AccountEntity? accountEntity = _accountRepository?.GetAccountInfo(UserNumber);
+                List<MovementEntity>? movementsEntityList = _movementsRepository?.GetMovements(UserNumber);
                 if (accountEntity != null && movementsEntityList != null)
                 {
                     accountModel.Money = accountEntity.money;
@@ -112,8 +147,8 @@ namespace MultiBankOOP.Library.Impl
                         timestamp = accountModel.Movements.Last().Timestamp
                     };
 
-                    _accountRepository?.UpdateAccount(accountEntity);
-                    _movementsRepository?.AddMovement(movementToAdd);
+                    _accountRepository?.UpdateAccount(UserNumber, accountEntity);
+                    _movementsRepository?.AddMovement(UserNumber, movementToAdd);
 
                     result.totalMoney = accountModel.Money;
                 }
@@ -145,7 +180,7 @@ namespace MultiBankOOP.Library.Impl
 
         public MovementListDto GetMovements()
         {
-            List<MovementEntity> movementsEntityList = _movementsRepository?.GetMovements()!;
+            List<MovementEntity> movementsEntityList = _movementsRepository?.GetMovements(UserNumber)!;
 
             return new()
             {
@@ -160,7 +195,7 @@ namespace MultiBankOOP.Library.Impl
 
         public MovementListDto GetIncomes()
         {
-            List<MovementEntity> incomesEntityList = _movementsRepository!.GetMovements().Where(x => x.value > 0).ToList();
+            List<MovementEntity> incomesEntityList = _movementsRepository!.GetMovements(UserNumber).Where(x => x.value > 0).ToList();
 
             return new()
             {
@@ -175,7 +210,7 @@ namespace MultiBankOOP.Library.Impl
 
         public MovementListDto GetOutcomes()
         {
-            List<MovementEntity> outcomesEntityList = _movementsRepository!.GetMovements().Where(x => x.value < 0).ToList();
+            List<MovementEntity> outcomesEntityList = _movementsRepository!.GetMovements(UserNumber).Where(x => x.value < 0).ToList();
 
             return new()
             {
@@ -190,7 +225,7 @@ namespace MultiBankOOP.Library.Impl
 
         public decimal? GetMoney()
         {
-            AccountEntity? entity = _accountRepository?.GetAccountInfo();
+            AccountEntity? entity = _accountRepository?.GetAccountInfo(UserNumber);
             if (entity == null)
             {
                 throw new Exception();

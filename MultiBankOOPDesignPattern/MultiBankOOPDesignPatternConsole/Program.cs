@@ -15,12 +15,13 @@ namespace MultiBankOOP.Presentation.ConsoleUI
                 .AddScoped<IAccountRepository, AccountRepository>()
                 .AddScoped<IMovementsRepository, MovementsRepository>()
                 .AddScoped<IAccountService, AccountService>()
+                .AddScoped<LoginMenu>()
                 .AddScoped<MainMenu>()
                 .BuildServiceProvider();
 
-            MainMenu? mm = serviceProvider.GetService<MainMenu>();
+            LoginMenu? login_menu = serviceProvider.GetService<LoginMenu>();
 
-            mm?.Execute();
+            login_menu?.Execute();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace MultiBankOOP.Presentation.ConsoleUI
         private const string listOutcomesOption = "5";
         private const string showMoneyOption = "6";
         private const string exitOption = "7";
+        public string UserNumber { get; set; }
 
         // abstraction of line jump string
         private const string newLine = "\r\n";
@@ -51,10 +52,6 @@ namespace MultiBankOOP.Presentation.ConsoleUI
         public void Execute()
         {
             #region initial configuration
-            // data model containing the information that will be managed by this program
-            decimal userMoney = 0;
-            List<decimal> movementAmountList = new();
-            List<DateTime> movementInstantList = new();
 
             // data used during console interface interaction
             // - console custom configuration
@@ -68,6 +65,7 @@ namespace MultiBankOOP.Presentation.ConsoleUI
             bool exitProgram = false;
             #endregion
 
+            _accountService.SetUserNumber(UserNumber);
             // main menu full implementation code
             do
             {
