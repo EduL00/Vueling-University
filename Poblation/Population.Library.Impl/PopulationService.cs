@@ -95,7 +95,7 @@ namespace Population.Library.Impl
             List<PopulationResDto> resultList = new List<PopulationResDto>();
             List<CountryEntity> countries = _countryRepository.GetCountries();
 
-            if (countries == null)
+            if (countries.Count == 0)
             {
                 result.HasError = true;
                 result.Error = XCutting.Enums.ListPopulationReEnumError.NoCountriesInBD;
