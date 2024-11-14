@@ -39,7 +39,7 @@ namespace SimulSW.Presentation.WEBApiGUI.Controllers
                 if (result.Error == XCuttin.Enums.ResGetPopulationInfroEnumError.NotFound)
                     return StatusCode(StatusCodes.Status404NotFound, "Planet not found");
                 if (result.Error == XCuttin.Enums.ResGetPopulationInfroEnumError.NoPopulation)
-                    return StatusCode(StatusCodes.Status400BadRequest, "Planet wit unknown population");
+                    return StatusCode(StatusCodes.Status400BadRequest, "Planet with unknown population");
                 if (result.Error == XCuttin.Enums.ResGetPopulationInfroEnumError.ErrorApi)
                     return StatusCode(StatusCodes.Status400BadRequest, "Error getting the population info from the Api");
             }

@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SimulSW.Infraestructure.Contracts\SimulSW.Infraestructure.Contracts.csproj" />
     <ProjectReference Include="..\SimulSW.Library.Impl\SimulSW.Library.Impl.csproj" />
+    <ProjectReference Include="..\SimulSW.Presentation.WEBApiGUI\SimulSW.Presentation.WEBApiGUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
