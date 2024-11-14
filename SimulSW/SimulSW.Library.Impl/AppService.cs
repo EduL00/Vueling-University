@@ -103,6 +103,13 @@ namespace SimulSW.Library.Impl
                 return result;
             }
 
+            if (apiListNamesInfo.Result.Count == 0)
+            {
+                result.HasError = true;
+                result.Error = XCuttin.Enums.ResGetPopulationInfroEnumError.NoPopulation;
+                return result;
+            }
+
             result.PopulationNames = apiListNamesInfo.Result;
 
             return result;
