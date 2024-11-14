@@ -97,6 +97,44 @@ namespace SimulSW.Testing.UnitTesting.SimulSW.Presentation
         }
         #endregion
 
+        #region WhenGetPopulationInfo_EmptyPlanetName_ReturnsPlanetNameNotSet
+        [Fact]
+        public void WhenGetPopulationInfo_EmptyPlanetName_ReturnsPlanetNameNotSet()
+        {
+            // Arrange
+            Mock<IAppService> _mockAppService = new();
+
+            AppController sut = new(_mockAppService.Object);
+
+            // Act
+            IActionResult result = sut.GetPopulationInfo("");
+
+            // Assert
+            Assert.IsType<ObjectResult>(result);
+            Assert.Equal (StatusCodes.Status400BadRequest, ((ObjectResult)result).StatusCode);
+            Assert.Equal("Planet name not set", ((ObjectResult)result).Value);
+        }
+        #endregion
+
+        #region WhenGetPopulationInfo_NullPlanetName_ReturnsPlanetNameNotSet
+        [Fact]
+        public void WhenGetPopulationInfo_NullPlanetName_ReturnsPlanetNameNotSet()
+        {
+            // Arrange
+            Mock<IAppService> _mockAppService = new();
+            string? planetName = null;
+            AppController sut = new(_mockAppService.Object);
+
+            // Act
+            IActionResult result = sut.GetPopulationInfo(planetName);
+
+            // Assert
+            Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status400BadRequest, ((ObjectResult)result).StatusCode);
+            Assert.Equal("Planet name not set", ((ObjectResult)result).Value);
+        }
+        #endregion
+
         #region WhenGetPopulationInfo_PlanetNotFound_ReturnsPlanetNotFound
         [Fact]
         public void WhenGetPopulationInfo_PlanetNotFound_ReturnsPlanetNotFound()

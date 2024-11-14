@@ -20,11 +20,13 @@ namespace SimulSW.Presentation.WEBApiGUI.Controllers
         {
             ResGetApiInfoDTO result = _appService.GetApiInfo();
 
+            #region Tratamiento Errores
             if (result.HasError)
             {
                 if (result.Error == XCuttin.Enums.ResGetApiInfoErrorEnum.ErrorInApi)
                     return StatusCode(StatusCodes.Status400BadRequest, "Error getting the information data from the API");
             }
+            #endregion
 
             return Ok(result.PlanetNames);
         }
@@ -32,8 +34,15 @@ namespace SimulSW.Presentation.WEBApiGUI.Controllers
         [HttpGet("/PopulationInfo")] 
         public ActionResult GetPopulationInfo(string planetName) 
         {
+            #region Comprobacion input
+            if (string.IsNullOrEmpty(planetName))
+            {
+                return StatusCode(StatusCodes.Status400BadRequest,"Planet name not set");
+            }
+            #endregion
             ResGetPopulationInfroDTO result = _appService.GetPopulationInfo(planetName);
 
+            #region Tratamiento errores
             if (result.HasError)
             {
                 if (result.Error == XCuttin.Enums.ResGetPopulationInfroEnumError.NotFound)
@@ -43,6 +52,7 @@ namespace SimulSW.Presentation.WEBApiGUI.Controllers
                 if (result.Error == XCuttin.Enums.ResGetPopulationInfroEnumError.ErrorApi)
                     return StatusCode(StatusCodes.Status400BadRequest, "Error getting the population info from the Api");
             }
+            #endregion
 
             return Ok(result.PopulationNames); 
         }

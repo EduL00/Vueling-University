@@ -30,7 +30,6 @@ namespace SimulSW.Library.Impl
                 result.HasError = true;
                 result.Error = XCuttin.Enums.ResGetApiInfoErrorEnum.ErrorInApi;
                 return result;
-
             }
 
             APIInfoFromJsonEntity apiData = apiDataTask.Result;
