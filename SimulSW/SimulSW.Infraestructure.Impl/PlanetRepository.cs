@@ -14,6 +14,8 @@ namespace SimulSW.Infraestructure.Impl
         }
         public void RegisterPlanet(PlanetEntity planet)
         {
+            if ((_dbContext.Planets.FirstOrDefault(x => x.Name == planet.Name)) != null) return;
+
             _dbContext.Planets.Add(planet);
             _dbContext.SaveChanges();
         }
